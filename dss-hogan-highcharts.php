@@ -43,11 +43,6 @@ function hogan_load_textdomain() {
 }
 
 function scripts() {
-	// wp_enqueue_script(
-	// 	'modernizr-custom',
-	// 	plugin_dir_url( __FILE__ ) . 'assets/modernizr-custom.js',
-	// 	array( 'jquery' )
-	// );
 
 	wp_enqueue_script(
 		'highcharts',
@@ -84,7 +79,7 @@ function hogan_register_module( \Dekode\Hogan\Core $core ) {
 function on_hogan_outer_wrapper_classes( $classes, $module ) {
 
 	if ( 'dss_highcharts' == $module->name ) {
-		array_push( $classes, 'module-bg', 'container-full-width', 'hogan-module-simple_posts', 'hogan-module-highcharts' );
+		array_push( $classes, 'module-bg', 'container-full-width', 'hogan-module-highcharts' );
 	}
 	return $classes;
 }
