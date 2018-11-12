@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 }
 ?>
 
-<ul class="list-items card-type-large">
+<ul>
 	<?php
 
 	$counter = 0;
@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 			$title     = $graf['title'];
 			$file_name = $graf['file']['url'];
 			printf(
-				'<li class="list-item">
-						<div  class="column">
+				'<li>
+						<div class="column">
 							<div id="container-%s" class="graph">
-								<span >graf</span>
+								<span>graf</span>
 							</div>
 						</div>
 				</li>',
@@ -53,8 +53,6 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 						data: {
 							csv: csvFile
 						},
-
-						//colors: ['#7E287D', '#655E27', '#E0D020', '#FF71AB','#801c7d'],
 						colors: ['#7E287D', '#E0D020','#655E27', '#FF71AB','#801c7d'],
 						title: {
 							text: '%s'

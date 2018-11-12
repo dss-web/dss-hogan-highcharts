@@ -1,0 +1,14 @@
+.hogan-module-dss_highcharts ul {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	list-style: none;
+}
+
+.hogan-module-dss_highcharts li {
+	width: 46%;
+	margin-bottom: 0;
+}
