@@ -17,30 +17,18 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 }
 ?>
 
-<ul class="list-items card-type-large">
+<ul>
 	<?php
-
-	$counter = 0;
-	foreach ( $this->highcharts as $graf ) :
-		?>
-			<?php
-			$title     = $graf['title'];
-			$file_name = $graf['file']['url'];
-			printf(
-				'<li class="list-item">
-						<div  class="column">
+	$script = '';
+	foreach ( $this->highcharts as $graph ) :
+		printf( '<li>
+						<div class="column">
 							<div id="container-%s" class="graph">
-								<span >graf</span>
+								<span>graph</span>
 							</div>
 						</div>
-				</li>',
-				$counter
-			);
-
-
-			printf( '<script>' );
-			printf(
-				"jQuery.get('%s', function(csvFile) {
+				</li>', $graph['file']['ID'] );
+		$script .= sprintf( "jQuery.get('%s', function(csvFile) {
 					jQuery('#container-%s').highcharts({
 						chart: {
 							type: 'column',
@@ -53,8 +41,6 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 						data: {
 							csv: csvFile
 						},
-
-						//colors: ['#7E287D', '#655E27', '#E0D020', '#FF71AB','#801c7d'],
 						colors: ['#7E287D', '#E0D020','#655E27', '#FF71AB','#801c7d'],
 						title: {
 							text: '%s'
@@ -77,14 +63,8 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 							}]
 						}
 					});
-				});",
-				$file_name,
-				$counter,
-				$title
-			);
-			printf( '</script>' );
-			$counter = $counter + 1;
-
-			?>
-	<?php endforeach; ?>
+				});\n", $graph['file']['url'], $graph['file']['ID'], $graph['title'] );
+	endforeach;
+	printf( '<script>' . $script . '</script>' );
+	?>
 </ul>

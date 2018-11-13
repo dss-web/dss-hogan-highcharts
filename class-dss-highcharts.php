@@ -34,7 +34,7 @@ if ( ! class_exists( '\\Dekode\\Hogan\\DSS_Highcharts' ) && class_exists( '\\Dek
 		 */
 		public function __construct() {
 
-			$this->label    = __( 'highcharts', 'dss-hogan-highcharts' );
+			$this->label    = __( 'Highcharts', 'dss-hogan-highcharts' );
 			$this->template = __DIR__ . '/assets/template.php';
 
 			parent::__construct();
@@ -76,7 +76,7 @@ if ( ! class_exists( '\\Dekode\\Hogan\\DSS_Highcharts' ) && class_exists( '\\Dek
 							'key'           => $this->field_key . '_file',
 							'label'         => __( 'File', 'dss-hogan-highcharts' ),
 							'name'          => 'file',
-							'instructions' => apply_filters( 'dss/hogan/module/highcharts/title/instructions', esc_html_x( 'Allowed file types', 'ACF Instruction', 'dss-hogan-highcharts' ) ) . ': ' . apply_filters( 'dss/hogan/module/highcharts/mime_types', '.csv' ),
+							'instructions'  => apply_filters( 'dss/hogan/module/highcharts/title/instructions', esc_html_x( 'Allowed file types', 'ACF Instruction', 'dss-hogan-highcharts' ) ) . ': ' . apply_filters( 'dss/hogan/module/highcharts/mime_types', '.csv' ),
 							'required'      => 1,
 							'wrapper'       => [
 								'width' => '50',
@@ -95,10 +95,24 @@ if ( ! class_exists( '\\Dekode\\Hogan\\DSS_Highcharts' ) && class_exists( '\\Dek
 		}
 
 		/**
+		 * Enqueue module assets
+		 */
+		public function enqueue_assets() {
+			$_version = defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ? time() : false;
+			if ( true === apply_filters( 'hogan/module/expandable_list/load_styles', true ) ) {
+				wp_enqueue_style( 'dss-hogan-highcharts-styles', plugins_url( '/assets/styles.css', __FILE__ ), [], $_version );
+			}
+
+			wp_enqueue_script( 'highcharts', 'https://code.highcharts.com/highcharts.js', [ 'jquery' ], $_version );
+			wp_enqueue_script( 'highcharts-data', 'https://code.highcharts.com/modules/data.js', [ 'jquery' ], $_version );
+			wp_enqueue_script( 'highcharts-exporting', 'https://code.highcharts.com/modules/exporting.js', [ 'jquery' ], $_version );
+		}
+
+		/**
 		 * Map raw fields from acf to object variable.
 		 *
 		 * @param array $raw_content Content values.
-		 * @param int $counter Module location in page layout.
+		 * @param int   $counter Module location in page layout.
 		 *
 		 * @return void
 		 */
