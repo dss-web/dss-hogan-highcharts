@@ -103,11 +103,9 @@ if ( ! class_exists( '\\Dekode\\Hogan\\DSS_Highcharts' ) && class_exists( '\\Dek
 				wp_enqueue_style( 'dss-hogan-highcharts-styles', plugins_url( '/assets/styles.css', __FILE__ ), [], $_version );
 			}
 
-			if ( true === apply_filters( 'dss/hogan/module/highcharts/load_scripts', true ) ) {
-				wp_enqueue_script( 'highcharts', 'https://code.highcharts.com/highcharts.js', [ 'jquery' ], $_version );
-				wp_enqueue_script( 'highcharts-data', 'https://code.highcharts.com/modules/data.js', [ 'jquery' ], $_version );
-				wp_enqueue_script( 'highcharts-exporting', 'https://code.highcharts.com/modules/exporting.js', [ 'jquery' ], $_version );
-			}
+			wp_enqueue_script( 'highcharts', 'https://code.highcharts.com/highcharts.js', [ 'jquery' ], $_version );
+			wp_enqueue_script( 'highcharts-data', 'https://code.highcharts.com/modules/data.js', [ 'jquery' ], $_version );
+			wp_enqueue_script( 'highcharts-exporting', 'https://code.highcharts.com/modules/exporting.js', [ 'jquery' ], $_version );
 		}
 
 		/**

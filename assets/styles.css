@@ -1,14 +1,25 @@
 .hogan-module-dss_highcharts ul {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	justify-content: space-between;
 	list-style: none;
+	margin-top: -36px;
 }
 
 .hogan-module-dss_highcharts li {
-	width: 46%;
-	margin-bottom: 0;
+	margin-top: 36px;
+}
+
+@media screen and (min-width: 768px) {
+	.hogan-module-dss_highcharts ul {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+		justify-content: space-between;
+	}
+
+	.hogan-module-dss_highcharts li {
+		width: 46%;
+	}
 }
