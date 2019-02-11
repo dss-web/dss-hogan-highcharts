@@ -20,19 +20,32 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 <ul>
 	<?php
 	$script = '';
+	$num    = 0;
 	foreach ( $this->highcharts as $graph ) :
-		printf( '<li>
+		printf(
+			'<li>
 						<div class="column">
 							<div id="container-%s" class="graph">
 								<span>graph</span>
 							</div>
 						</div>
-				</li>', $graph['file']['ID'] );
-		$script .= sprintf( "jQuery.get('%s', function(csvFile) {
+				</li>',
+			$graph['file']['ID'] . '-' . $num
+		);
+		$script .= sprintf(
+			"jQuery.get('%s', function(csvFile) {
 					jQuery('#container-%s').highcharts({
-						chart: {
-							type: 'column',
-							backgroundColor: '#f1f1f1',
+						chart: { // documented at https://api.highcharts.com/highcharts/plotOptions
+							type: '%s',
+							// type: 'area',
+							// type: 'areaspline',
+							// type: 'bar',
+							// type: 'column',
+							// type: 'line',
+							// type: 'pie',
+							// type: 'scatter',
+							// type: 'spline',
+							// backgroundColor: '#f1f1f1',
 							style: {
 									fontFamily: 'Open Sans',
 									fontSize: '12px'
@@ -41,7 +54,9 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 						data: {
 							csv: csvFile
 						},
-						colors: ['#7E287D', '#E0D020','#655E27', '#FF71AB','#801c7d'],
+						// colors: '#7cb5ec #434348 #90ed7d #f7a35c #8085e9 #f15c80 #e4d354 #2b908f #f45b5b #91e8e1'.split(' '),
+						colors: '%s'.split(' '),
+						// colors: ['#7E287D', '#E0D020','#655E27', '#FF71AB','#801c7d'],
 						title: {
 							text: '%s'
 						},
@@ -63,8 +78,18 @@ if ( ! defined( 'ABSPATH' ) || ! ( $this instanceof DSS_Highcharts ) ) {
 							}]
 						}
 					});
-				});\n", $graph['file']['url'], $graph['file']['ID'], $graph['title'] );
+				});\n",
+			$graph['file']['url'] . '?=' . rand(),
+			$graph['file']['ID'] . '-' . $num,
+			$graph['graph'],
+			$graph['color_scheme'],
+			$graph['title']
+		);
+		$num++;
 	endforeach;
+
+	write_log( $this->highcharts );
+
 	printf( '<script>' . $script . '</script>' );
 	?>
 </ul>
