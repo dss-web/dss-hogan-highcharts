@@ -3,8 +3,28 @@
 
 <img src="assets/img/grafer.png">
 
+## Prerequisite
+* ACF Pro
+* [Hogan Core](https://github.com/dekodeinteraktiv/hogan-core)
+
 ## Installation
 Downloading this repository and place it in `wp-content/plugins`
+
+## Avalable filters
+
+`hogan/module/highcharts/color_scheme` Add/replace color schemes.
+
+Example:
+
+```php
+add_filter( 'hogan/module/highcharts/color_scheme', function( $color_schemes ) {
+
+	$color_schemes['my_color_scheme'] = '#7cb5ec, #434348, #90ed7d, #f7a35c, #8085e9, #f15c80, #e4d354, #2b908f, #f45b5b, #91e8e1';
+
+	return $color_schemes;
+
+} );
+```
 
 ## Changelog
 
